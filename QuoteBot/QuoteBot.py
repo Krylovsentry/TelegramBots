@@ -4,6 +4,7 @@ import telebot
 import time
 
 
+token = ''
 language = 'en'
 
 
@@ -14,11 +15,27 @@ def listener(messages):
     for m in messages:
 
         if m.content_type == 'text':
-
-            bot.send_message(m.chat.id, get_quote())
-
+            quote_every_hour(messages,True)
 
 
+
+
+
+
+def quote_every_hour(messages,switcher):
+
+  while switcher:
+           for m in messages:
+
+               bot.send_message(m.chat.id,get_quote())
+               #time.sleep make a pause in executing script, on a value of second that we write in the field
+               time.sleep(5)
+
+
+
+
+
+#Return quote from api.forismatic.com
 def get_quote():
 
 
@@ -29,7 +46,7 @@ def get_quote():
 
 if __name__ == '__main__':
 #Put you token here
-    bot  = telebot.TeleBot()
+    bot  = telebot.TeleBot(token)
 
     bot.set_update_listener(listener)
 
