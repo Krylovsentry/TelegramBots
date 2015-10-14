@@ -22,6 +22,7 @@ def listener(messages):
 
 
 
+
 def quote_every_hour(messages,switcher):
 
   while switcher:
