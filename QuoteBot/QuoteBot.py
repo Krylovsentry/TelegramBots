@@ -5,8 +5,8 @@ import time
 
 
 token = '125846015:AAFgMHVQuppvHqW-WnZ-A9wYJMa7kxsTGSo'
-language = 'en'
-time_for_quote = 3600
+language = 'ru'
+time_for_quote = 60
 command = "/start, /help, /stop, /time, /lang"
 switcher = True
 
@@ -25,7 +25,7 @@ def listener(messages):
                     switcher = True
                     while switcher:
                           bot.send_message(m.chat.id,get_quote())
-                          time.sleep(2)
+                          time.sleep(time_for_quote)
                 elif m.text.startswith('/stop'):
                     switcher = False
 
