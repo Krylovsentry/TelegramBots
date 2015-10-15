@@ -6,7 +6,7 @@ import time
 
 token = '125846015:AAFgMHVQuppvHqW-WnZ-A9wYJMa7kxsTGSo'
 language = 'ru'
-time_for_quote = 5
+time_for_quote = 60
 command = "/start, /help, /stop, /lang, /time"
 switcher = True
 
@@ -39,7 +39,7 @@ def listener(messages):
                     bot.send_message(m.chat.id, "Write a number in minutes, for give quote in this interval")
 
                 elif m.text.isdigit():
-                    time_for_quote = int(m.text)
+                    time_for_quote = 60*int(m.text)
 
 #Return quote from api.forismatic.com
 def get_quote():
