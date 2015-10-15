@@ -4,8 +4,9 @@ import telebot
 import time
 
 
-token = ''
+token = '125846015:AAH09k4Aj1YUYeV3gXuS6Tz19O7lUpKtZjE'
 language = 'en'
+time_for_quote = 3600
 
 
 
@@ -14,8 +15,8 @@ def listener(messages):
 
     for m in messages:
 
-        if m.content_type == 'text':
-            quote_every_hour(messages,True)
+                if m.text.startswith('/start'):
+                    quote_every_time(messages,True)
 
 
 
@@ -23,14 +24,19 @@ def listener(messages):
 
 
 
-def quote_every_hour(messages,switcher):
+
+
+def quote_every_time(messages,switcher):
 
   while switcher:
            for m in messages:
 
                bot.send_message(m.chat.id,get_quote())
                #time.sleep make a pause in executing script, on a value of second that we write in the field
-               time.sleep(5)
+               time.sleep(time_for_quote)
+
+
+
 
 
 
@@ -56,6 +62,6 @@ if __name__ == '__main__':
     bot.polling(none_stop=True)
 
     while True:
-        time.sleep(200)
+        time.sleep(1)
 
 
