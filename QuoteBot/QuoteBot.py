@@ -6,15 +6,15 @@ import time
 
 token = '125846015:AAFgMHVQuppvHqW-WnZ-A9wYJMa7kxsTGSo'
 language = 'ru'
-time_for_quote = 60
-command = "/start, /help, /stop, /time, /lang"
+time_for_quote = 5
+command = "/start, /help, /stop, /lang, /time"
 switcher = True
 
 
 def listener(messages):
 
 
-    global switcher
+    global switcher, language, time_for_quote
     for m in messages:
         if m.content_type == 'text':
 
@@ -28,6 +28,18 @@ def listener(messages):
                           time.sleep(time_for_quote)
                 elif m.text.startswith('/stop'):
                     switcher = False
+
+                elif m.text.startswith('/lang'):
+                    if language == 'en':
+                        language = 'ru'
+                    elif language == 'ru':
+                        language = 'en'
+
+                elif m.text.startswith('/time'):
+                    bot.send_message(m.chat.id, "Write a number in minutes, for give quote in this interval")
+
+                elif m.text.isdigit():
+                    time_for_quote = int(m.text)
 
 #Return quote from api.forismatic.com
 def get_quote():
