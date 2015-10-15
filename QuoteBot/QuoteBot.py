@@ -4,7 +4,7 @@ import telebot
 import time
 
 
-token = '125846015:AAH09k4Aj1YUYeV3gXuS6Tz19O7lUpKtZjE'
+token = '125846015:AAFgMHVQuppvHqW-WnZ-A9wYJMa7kxsTGSo'
 language = 'en'
 time_for_quote = 3600
 command = "/start, /help, /stop, /time, /lang"
@@ -16,37 +16,18 @@ def listener(messages):
 
     global switcher
     for m in messages:
+        if m.content_type == 'text':
 
                 if m.text.startswith('/help'):
 
                     bot.send_message(m.chat.id,"Hello my friends, you can command me by next messages: "+command)
                 elif m.text.startswith('/start'):
+                    switcher = True
                     while switcher:
                           bot.send_message(m.chat.id,get_quote())
-                          time.sleep(time_for_quote)
+                          time.sleep(2)
                 elif m.text.startswith('/stop'):
                     switcher = False
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #Return quote from api.forismatic.com
 def get_quote():
