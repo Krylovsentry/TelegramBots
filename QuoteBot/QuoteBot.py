@@ -7,16 +7,25 @@ import time
 token = '125846015:AAH09k4Aj1YUYeV3gXuS6Tz19O7lUpKtZjE'
 language = 'en'
 time_for_quote = 3600
-
+command = "/start, /help, /stop, /time, /lang"
+switcher = True
 
 
 def listener(messages):
 
 
+    global switcher
     for m in messages:
 
-                if m.text.startswith('/start'):
-                    quote_every_time(messages,True)
+                if m.text.startswith('/help'):
+
+                    bot.send_message(m.chat.id,"Hello my friends, you can command me by next messages: "+command)
+                elif m.text.startswith('/start'):
+                    while switcher:
+                          bot.send_message(m.chat.id,get_quote())
+                          time.sleep(time_for_quote)
+                elif m.text.startswith('/stop'):
+                    switcher = False
 
 
 
@@ -26,14 +35,11 @@ def listener(messages):
 
 
 
-def quote_every_time(messages,switcher):
 
-  while switcher:
-           for m in messages:
 
-               bot.send_message(m.chat.id,get_quote())
-               #time.sleep make a pause in executing script, on a value of second that we write in the field
-               time.sleep(time_for_quote)
+
+
+
 
 
 
@@ -56,6 +62,7 @@ if __name__ == '__main__':
     bot  = telebot.TeleBot(token)
 
     bot.set_update_listener(listener)
+
 
 # Run for Long Polling. Server holds the request open until new data is available
 
